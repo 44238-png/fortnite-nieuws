@@ -1,0 +1,549 @@
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mijn Poll</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #eef4ff, #ffffff);
+    color: #222;
+}
+
+/* NAVIGATIE */
+.navbar {
+    background: #1769ff;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px #0003;
+}
+
+.logo {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-links button {
+    border: 0;
+    background: transparent;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-links button:hover,
+.nav-links button.active {
+    background: #0d55d8;
+}
+
+/* PAGINA'S */
+.page {
+    display: none;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* KAARTEN */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px #0002;
+}
+
+h1 {
+    font-size: 35px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+/* POLL */
+.option {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+}
+
+.option:hover {
+    border-color: #1769ff;
+    background: #f3f7ff;
+}
+
+.option.selected {
+    border-color: #1769ff;
+    background: #eaf2ff;
+}
+
+.submit {
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    border-radius: 12px;
+    background: #1769ff;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submit:hover {
+    background: #0d55d8;
+}
+
+.message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* UITSLAGEN */
+.result {
+    margin: 22px 0;
+}
+
+.result-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.bar {
+    width: 100%;
+    height: 30px;
+    background: #e5e5e5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1769ff, #55a5ff);
+    border-radius: 20px;
+    transition: width .5s;
+}
+
+.total {
+    text-align: center;
+    color: #666;
+    margin-top: 25px;
+}
+
+/* HOME */
+.home-button {
+    display: inline-block;
+    background: #1769ff;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media(max-width:600px) {
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATIE -->
+<nav class="navbar">
+
+    <div class="logo">
+        📊 Mijn Poll
+    </div>
+
+    <div class="nav-links">
+        <button id="homeBtn" onclick="showPage('home')">
+            🏠 Home
+        </button>
+
+        <button id="pollBtn" onclick="showPage('poll')">
+            🗳️ Poll
+        </button>
+
+        <button id="resultsBtn" onclick="showPage('results')">
+            📈 Uitslagen
+        </button>
+    </div>
+
+</nav>
+
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+    <div class="card">
+
+        <h1>Welkom! 👋</h1>
+
+        <p>
+            Welkom op de pollwebsite!
+        </p>
+
+        <p>
+            Bekijk de poll en breng je stem uit.
+            Daarna kun je de actuele uitslagen bekijken.
+        </p>
+
+        <button class="home-button"
+                onclick="showPage('poll')">
+            🗳️ Naar de poll
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- POLL -->
+<section id="poll" class="page">
+
+    <div class="card">
+
+        <h2 id="pollQuestion">
+            Wat vind jij?
+        </h2>
+
+        <div id="options"></div>
+
+        <button class="submit" onclick="vote()">
+            Stem indienen
+        </button>
+
+        <div id="message" class="message"></div>
+
+    </div>
+
+</section>
+
+
+<!-- UITSLAGEN -->
+<section id="results" class="page">
+
+    <div class="card">
+
+        <h2>📈 Poll uitslagen</h2>
+
+        <div id="resultsContainer"></div>
+
+        <div class="total">
+            Totaal aantal stemmen:
+            <strong id="totalVotes">0</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   POLL INSTELLINGEN
+========================= */
+
+const pollQuestion = "Wat vind jij?";
+
+const pollOptions = [
+    "Optie 1",
+    "Optie 2",
+    "Optie 3"
+];
+
+
+/* =========================
+   STEMMEN LADEN
+========================= */
+
+let votes = JSON.parse(
+    localStorage.getItem("pollVotes")
+) || {};
+
+
+/* Ontbrekende opties toevoegen */
+
+pollOptions.forEach(option => {
+
+    if (typeof votes[option] !== "number") {
+        votes[option] = 0;
+    }
+
+});
+
+
+/* =========================
+   PAGINA WISSELEN
+========================= */
+
+function showPage(pageName) {
+
+    document.querySelectorAll(".page")
+        .forEach(page => {
+            page.classList.remove("active");
+        });
+
+    document.getElementById(pageName)
+        .classList.add("active");
+
+
+    document.querySelectorAll(".nav-links button")
+        .forEach(button => {
+            button.classList.remove("active");
+        });
+
+
+    if (pageName === "home") {
+        document.getElementById("homeBtn")
+            .classList.add("active");
+    }
+
+    if (pageName === "poll") {
+        document.getElementById("pollBtn")
+            .classList.add("active");
+    }
+
+    if (pageName === "results") {
+        document.getElementById("resultsBtn")
+            .classList.add("active");
+
+        updateResults();
+    }
+
+}
+
+
+/* =========================
+   POLL MAKEN
+========================= */
+
+document.getElementById("pollQuestion")
+    .textContent = pollQuestion;
+
+
+const optionsContainer =
+    document.getElementById("options");
+
+
+pollOptions.forEach(option => {
+
+    const button = document.createElement("button");
+
+    button.className = "option";
+
+    button.textContent = "⚪ " + option;
+
+    button.onclick = function() {
+
+        document.querySelectorAll(".option")
+            .forEach(btn => {
+                btn.classList.remove("selected");
+            });
+
+        button.classList.add("selected");
+
+        button.dataset.selected = "true";
+
+        window.selectedOption = option;
+
+    };
+
+    optionsContainer.appendChild(button);
+
+});
+
+
+/* =========================
+   STEMMEN
+========================= */
+
+function vote() {
+
+    const message =
+        document.getElementById("message");
+
+
+    if (!window.selectedOption) {
+
+        message.textContent =
+            "⚠️ Kies eerst een optie.";
+
+        message.style.color = "red";
+
+        return;
+    }
+
+
+    votes[window.selectedOption]++;
+
+
+    localStorage.setItem(
+        "pollVotes",
+        JSON.stringify(votes)
+    );
+
+
+    message.textContent =
+        "✅ Je stem is opgeslagen!";
+
+    message.style.color = "green";
+
+
+    window.selectedOption = null;
+
+
+    document.querySelectorAll(".option")
+        .forEach(btn => {
+
+            btn.classList.remove("selected");
+
+            btn.dataset.selected = "false";
+
+        });
+
+
+    updateResults();
+
+}
+
+
+/* =========================
+   UITSLAGEN
+========================= */
+
+function updateResults() {
+
+    const container =
+        document.getElementById("resultsContainer");
+
+
+    container.innerHTML = "";
+
+
+    let total = 0;
+
+
+    pollOptions.forEach(option => {
+
+        total += votes[option];
+
+    });
+
+
+    document.getElementById("totalVotes")
+        .textContent = total;
+
+
+    pollOptions.forEach(option => {
+
+        let amount = votes[option];
+
+        let percentage = 0;
+
+
+        if (total > 0) {
+
+            percentage =
+                (amount / total) * 100;
+
+        }
+
+
+        const result =
+            document.createElement("div");
+
+        result.className = "result";
+
+
+        result.innerHTML = `
+
+            <div class="result-top">
+
+                <span>${option}</span>
+
+                <span>
+                    ${amount} stemmen
+                    (${percentage.toFixed(1)}%)
+                </span>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width:${percentage}%">
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(result);
+
+    });
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+document.getElementById("homeBtn")
+    .classList.add("active");
+
+updateResults();
+
+</script>
+
+</body>
+</html>
+```
