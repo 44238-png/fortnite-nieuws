@@ -1,9 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Fortnite News</title>
 
 <style>
@@ -16,6 +16,7 @@
     --red:#ef4444;
 
     --bg:#070b14;
+    --bg2:#0d1322;
     --card:#111827;
     --card2:#172033;
 
@@ -48,6 +49,7 @@ body{
 
 body.light{
     --bg:#f2f5fb;
+    --bg2:#ffffff;
     --card:#ffffff;
     --card2:#eef2f8;
     --text:#111827;
@@ -59,11 +61,6 @@ body.light{
         #f2f5fb;
 }
 
-button,
-input{
-    font-family:inherit;
-}
-
 /* ================= NAVBAR ================= */
 
 .navbar{
@@ -71,13 +68,13 @@ input{
     top:0;
     z-index:1000;
 
-    min-height:72px;
+    height:72px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    padding:12px 5%;
+    padding:0 5%;
 
     background:rgba(7,11,20,.86);
     backdrop-filter:blur(18px);
@@ -127,7 +124,11 @@ body.light .navbar{
 }
 
 .nav-links a:hover{
-    color:var(--text);
+    color:white;
+}
+
+body.light .nav-links a:hover{
+    color:#111827;
 }
 
 .nav-actions{
@@ -167,23 +168,17 @@ body.light .navbar{
     overflow:hidden;
 
     background:
-        linear-gradient(
-            90deg,
+        linear-gradient(90deg,
             rgba(7,11,20,.96),
             rgba(7,11,20,.72),
             rgba(7,11,20,.25)
         ),
-        radial-gradient(
-            circle at 75% 50%,
-            rgba(59,130,246,.3),
-            transparent 35%
-        );
+        radial-gradient(circle at 75% 50%,rgba(59,130,246,.3),transparent 35%);
 }
 
 .hero::before{
     content:"";
     position:absolute;
-
     width:500px;
     height:500px;
 
@@ -191,7 +186,6 @@ body.light .navbar{
     top:-180px;
 
     background:linear-gradient(135deg,var(--blue),var(--purple));
-
     opacity:.18;
 
     transform:rotate(25deg);
@@ -310,7 +304,7 @@ section{
     margin-top:6px;
 }
 
-.count{
+.section-title .count{
     color:var(--muted);
     font-size:13px;
 }
@@ -343,7 +337,6 @@ section{
 
 .news-image{
     height:210px;
-
     background-size:cover;
     background-position:center;
 
@@ -383,12 +376,7 @@ section{
 
 .shop-section{
     background:
-        linear-gradient(
-            180deg,
-            transparent,
-            rgba(59,130,246,.025),
-            transparent
-        );
+        linear-gradient(180deg,transparent,rgba(59,130,246,.025),transparent);
 }
 
 .shop-toolbar{
@@ -435,7 +423,6 @@ body.light .shop-toolbar{
 
 .filter-btn{
     border:1px solid var(--border);
-
     background:var(--card);
     color:var(--muted);
 
@@ -458,7 +445,6 @@ body.light .shop-toolbar{
 
 .shop-status{
     width:100%;
-
     display:flex;
     align-items:center;
     gap:8px;
@@ -470,10 +456,9 @@ body.light .shop-toolbar{
 .status-dot{
     width:8px;
     height:8px;
-
     border-radius:50%;
-
     background:var(--green);
+
     box-shadow:0 0 12px var(--green);
 }
 
@@ -490,6 +475,7 @@ body.light .shop-toolbar{
     justify-content:space-between;
 
     margin-bottom:17px;
+
     padding-bottom:12px;
 
     border-bottom:1px solid var(--border);
@@ -552,6 +538,8 @@ body.light .shop-toolbar{
     overflow:hidden;
 
     transition:.22s;
+
+    min-width:0;
 }
 
 .shop-card:hover{
@@ -564,11 +552,7 @@ body.light .shop-toolbar{
     aspect-ratio:1/1;
 
     background:
-        radial-gradient(
-            circle at center,
-            rgba(59,130,246,.12),
-            transparent 60%
-        ),
+        radial-gradient(circle at center,rgba(59,130,246,.12),transparent 60%),
         var(--card2);
 
     position:relative;
@@ -632,11 +616,12 @@ body.light .shop-toolbar{
 
 .shop-info h4{
     font-size:14px;
-    margin-bottom:5px;
 
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+
+    margin-bottom:5px;
 }
 
 .shop-sub{
@@ -704,7 +689,7 @@ body.light .shop-toolbar{
     color:var(--muted);
 }
 
-/* ================= DEFAULT ================= */
+/* ================= DEFAULT SKIN ================= */
 
 .friend-box{
     padding:30px;
@@ -775,8 +760,7 @@ body.light .shop-toolbar{
     padding:30px;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             rgba(139,92,246,.13),
             rgba(236,72,153,.08)
         ),
@@ -790,7 +774,7 @@ body.light .shop-toolbar{
     margin-bottom:7px;
 }
 
-.poll-description{
+.poll p{
     color:var(--muted);
     margin-bottom:20px;
 }
@@ -811,81 +795,10 @@ body.light .shop-toolbar{
 
     cursor:pointer;
     font-weight:800;
-
-    transition:.2s;
 }
 
 .poll-buttons button:hover{
     border-color:var(--purple);
-    transform:translateY(-2px);
-}
-
-.poll-buttons button.selected{
-    background:var(--blue);
-    border-color:var(--blue);
-    color:white;
-}
-
-.vote-result{
-    margin-top:18px;
-    font-weight:800;
-}
-
-.poll-results{
-    margin-top:30px;
-    padding-top:25px;
-
-    border-top:1px solid var(--border);
-}
-
-.poll-results h3{
-    margin-bottom:20px;
-}
-
-.result{
-    margin-bottom:18px;
-}
-
-.result-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-
-    margin-bottom:7px;
-
-    font-size:14px;
-    font-weight:800;
-}
-
-.result-bar{
-    width:100%;
-    height:12px;
-
-    background:var(--card2);
-
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.result-fill{
-    height:100%;
-
-    background:linear-gradient(
-        90deg,
-        var(--blue),
-        var(--purple),
-        var(--pink)
-    );
-
-    border-radius:20px;
-
-    transition:width .5s;
-}
-
-.total-votes{
-    color:var(--muted);
-    font-size:13px;
-    margin-top:20px;
 }
 
 /* ================= FOOTER ================= */
@@ -929,6 +842,7 @@ footer strong{
 
 .modal-box{
     width:min(700px,100%);
+
     max-height:90vh;
     overflow:auto;
 
@@ -965,7 +879,6 @@ footer strong{
 .modal-image{
     width:100%;
     aspect-ratio:16/9;
-
     object-fit:cover;
     background:var(--card2);
 }
@@ -985,6 +898,145 @@ footer strong{
 }
 
 /* ================= MOBILE ================= */
+
+
+/* =========================
+   TEAM SECTIE
+========================= */
+.team-section{
+    padding:80px 20px;
+}
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:24px;
+    margin-top:30px;
+}
+
+.team-card,
+.team-form-card{
+    background:var(--card,#151515);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:22px;
+    padding:28px;
+    box-shadow:0 12px 35px rgba(0,0,0,.18);
+}
+
+.team-card h3,
+.team-form-card h2{
+    margin-top:0;
+}
+
+.team-badge{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    background:linear-gradient(135deg,#7c3aed,#2563eb);
+    margin-bottom:16px;
+}
+
+.team-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:16px 0;
+}
+
+.team-tag{
+    padding:7px 11px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    font-size:13px;
+}
+
+.team-search-box{
+    max-width:650px;
+    margin:0 auto 35px;
+}
+
+.team-search-box input,
+.team-form input,
+.team-form select,
+.team-form textarea{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.06);
+    color:inherit;
+    outline:none;
+    font:inherit;
+}
+
+.team-form input:focus,
+.team-form select:focus,
+.team-form textarea:focus,
+.team-search-box input:focus{
+    border-color:#7c3aed;
+    box-shadow:0 0 0 3px rgba(124,58,237,.16);
+}
+
+.team-form{
+    display:grid;
+    gap:16px;
+}
+
+.team-form label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:700;
+}
+
+.team-form textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.team-form .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.team-form-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:5px;
+}
+
+.team-success{
+    display:none;
+    margin-top:18px;
+    padding:14px 16px;
+    border-radius:12px;
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.35);
+}
+
+.team-empty{
+    display:none;
+    text-align:center;
+    padding:25px;
+    opacity:.7;
+}
+
+.team-note{
+    font-size:13px;
+    opacity:.7;
+    margin-top:5px;
+}
+
+@media(max-width:700px){
+    .team-form .form-row{
+        grid-template-columns:1fr;
+    }
+}
 
 @media(max-width:1100px){
 
@@ -1029,6 +1081,11 @@ footer strong{
     .shop-grid{
         grid-template-columns:repeat(3,1fr);
     }
+
+    .friend-box{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 }
 
 @media(max-width:600px){
@@ -1071,10 +1128,6 @@ footer strong{
     .category-count{
         font-size:11px;
     }
-
-    .result-top{
-        font-size:12px;
-    }
 }
 
 @media(max-width:380px){
@@ -1102,7 +1155,7 @@ footer strong{
         <a href="#shop">Item Shop</a>
         <a href="#cosmetics">Cosmetics</a>
         <a href="#toernooien">Toernooien</a>
-        <a href="#community">Poll</a>
+        <a href="#community">Community</a>
     </nav>
 
     <div class="nav-actions">
@@ -1135,7 +1188,6 @@ footer strong{
         </p>
 
         <div class="hero-buttons">
-
             <a class="btn btn-primary" href="#shop">
                 🛒 Bekijk Item Shop
             </a>
@@ -1143,7 +1195,6 @@ footer strong{
             <a class="btn btn-secondary" href="#nieuws">
                 📰 Laatste nieuws
             </a>
-
         </div>
 
     </div>
@@ -1178,23 +1229,17 @@ footer strong{
             <div class="news-image"
                 style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=80')">
 
-                <span class="news-tag">
-                    ITEM SHOP
-                </span>
+                <span class="news-tag">ITEM SHOP</span>
 
             </div>
 
             <div class="news-body">
-
-                <h3>
-                    De Item Shop is bijgewerkt
-                </h3>
+                <h3>De Item Shop is bijgewerkt</h3>
 
                 <p>
                     Bekijk de huidige shop en ontdek welke
                     cosmetics vandaag beschikbaar zijn.
                 </p>
-
             </div>
 
         </article>
@@ -1209,17 +1254,13 @@ footer strong{
             <div class="news-image"
                 style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80')">
 
-                <span class="news-tag">
-                    COSMETICS
-                </span>
+                <span class="news-tag">COSMETICS</span>
 
             </div>
 
             <div class="news-body">
 
-                <h3>
-                    Nieuwe cosmetics
-                </h3>
+                <h3>Nieuwe cosmetics</h3>
 
                 <p>
                     Bekijk nieuwe outfits, pickaxes, emotes
@@ -1234,23 +1275,19 @@ footer strong{
         <article class="news-card"
             onclick="openNews(
                 'Community',
-                'Doe mee met de community en stem in de Fortnite Community Poll.'
+                'Doe mee met de community en laat weten wat jij van Fortnite vindt.'
             )">
 
             <div class="news-image"
                 style="background-image:url('https://images.unsplash.com/photo-1603481546238-487240415921?auto=format&fit=crop&w=1000&q=80')">
 
-                <span class="news-tag">
-                    COMMUNITY
-                </span>
+                <span class="news-tag">COMMUNITY</span>
 
             </div>
 
             <div class="news-body">
 
-                <h3>
-                    Wat vind jij van Fortnite?
-                </h3>
+                <h3>Wat vind jij van Fortnite?</h3>
 
                 <p>
                     Stem mee in onze community poll.
@@ -1276,13 +1313,11 @@ footer strong{
     <div class="section-title">
 
         <div>
-
             <h2>🛒 Item Shop</h2>
 
             <p>
                 Alles netjes gesorteerd per soort item.
             </p>
-
         </div>
 
         <div class="count" id="totalCount">
@@ -1300,7 +1335,6 @@ footer strong{
             type="search"
             placeholder="🔎 Zoek een skin, emote, pickaxe..."
         >
-
 
         <button class="filter-btn active" data-filter="all">
             Alles
@@ -1342,7 +1376,6 @@ footer strong{
             📦 Bundles
         </button>
 
-
         <div class="shop-status">
 
             <span class="status-dot"></span>
@@ -1369,7 +1402,7 @@ footer strong{
 </section>
 
 
-<!-- ================= COSMETICS ================= -->
+<!-- ================= SPECIAL DEFAULT ================= -->
 
 <section id="cosmetics">
 
@@ -1378,13 +1411,8 @@ footer strong{
     <div class="section-title">
 
         <div>
-
             <h2>⭐ Speciale Skin</h2>
-
-            <p>
-                Deze staat speciaal op de site.
-            </p>
-
+            <p>Deze staat speciaal op de site.</p>
         </div>
 
     </div>
@@ -1394,9 +1422,7 @@ footer strong{
 
         <div>
 
-            <h2>
-                👕 Default Skin
-            </h2>
+            <h2>👕 Default Skin</h2>
 
             <p>
                 ⭐ Deze zit er speciaal in voor mijn vriend ❤️
@@ -1405,7 +1431,6 @@ footer strong{
             </p>
 
         </div>
-
 
         <button
             class="btn btn-primary"
@@ -1431,13 +1456,8 @@ footer strong{
     <div class="section-title">
 
         <div>
-
             <h2>🏆 Toernooien</h2>
-
-            <p>
-                Fortnite competitie
-            </p>
-
+            <p>Fortnite competitie</p>
         </div>
 
     </div>
@@ -1447,13 +1467,9 @@ footer strong{
 
         <div class="tournament">
 
-            <div class="tournament-icon">
-                🏆
-            </div>
+            <div class="tournament-icon">🏆</div>
 
-            <h3>
-                Battle Royale
-            </h3>
+            <h3>Battle Royale</h3>
 
             <p>
                 Speel mee in Battle Royale en probeer
@@ -1465,13 +1481,9 @@ footer strong{
 
         <div class="tournament">
 
-            <div class="tournament-icon">
-                ⚔️
-            </div>
+            <div class="tournament-icon">⚔️</div>
 
-            <h3>
-                Team Tournament
-            </h3>
+            <h3>Team Tournament</h3>
 
             <p>
                 Vorm een team en speel samen tegen andere teams.
@@ -1482,13 +1494,9 @@ footer strong{
 
         <div class="tournament">
 
-            <div class="tournament-icon">
-                👑
-            </div>
+            <div class="tournament-icon">👑</div>
 
-            <h3>
-                FNCS
-            </h3>
+            <h3>FNCS</h3>
 
             <p>
                 Bekijk nieuws en informatie over de
@@ -1504,86 +1512,185 @@ footer strong{
 </section>
 
 
-<!-- ================= COMMUNITY POLL ================= -->
+<!-- ================= COMMUNITY ================= -->
+
+
+<section id="teams" class="team-section">
+    <div class="container">
+        <div style="text-align:center;max-width:800px;margin:0 auto;">
+            <span class="team-tag">🎮 COMMUNITY</span>
+            <h2 style="font-size:clamp(32px,5vw,48px);margin:15px 0 10px;">
+                Vind een <span style="color:#7c3aed;">Fortnite Team</span>
+            </h2>
+            <p style="opacity:.75;">
+                Zoek een team dat bij je past of meld je aan voor mijn nieuwe team.
+            </p>
+        </div>
+
+        <div class="team-search-box" style="margin-top:30px;">
+            <input
+                id="teamSearch"
+                type="search"
+                placeholder="🔎 Zoek op teamnaam, modus of speelstijl..."
+                oninput="filterTeams()"
+            >
+        </div>
+
+        <div class="team-grid" id="teamList">
+            <article class="team-card" data-team-search="thijs gaming build battle royale competitief">
+                <div class="team-badge">⚡</div>
+                <h3>Thijs Gaming</h3>
+                <p>Een nieuw Fortnite-communityteam voor spelers die samen willen spelen en toernooien willen doen.</p>
+                <div class="team-meta">
+                    <span class="team-tag">👥 Open voor spelers</span>
+                    <span class="team-tag">🏗️ Build</span>
+                    <span class="team-tag">🏆 Toernooien</span>
+                </div>
+                <button class="btn btn-primary" onclick="showTeamInfo('Thijs Gaming')">
+                    Bekijk team
+                </button>
+            </article>
+
+            <article class="team-card" data-team-search="reload zero build casual">
+                <div class="team-badge">🎯</div>
+                <h3>Reload Squad</h3>
+                <p>Voor spelers die vooral Reload en Zero Build spelen en graag samen willen trainen.</p>
+                <div class="team-meta">
+                    <span class="team-tag">⚡ Reload</span>
+                    <span class="team-tag">🎯 Zero Build</span>
+                    <span class="team-tag">👥 Squad</span>
+                </div>
+                <button class="btn btn-primary" onclick="showTeamInfo('Reload Squad')">
+                    Bekijk team
+                </button>
+            </article>
+
+            <article class="team-card" data-team-search="creative training oefening">
+                <div class="team-badge">🧱</div>
+                <h3>Creative Crew</h3>
+                <p>Een community voor spelers die Creative maps, oefenen en samen spelen leuk vinden.</p>
+                <div class="team-meta">
+                    <span class="team-tag">🧱 Creative</span>
+                    <span class="team-tag">🎮 Training</span>
+                    <span class="team-tag">🤝 Community</span>
+                </div>
+                <button class="btn btn-primary" onclick="showTeamInfo('Creative Crew')">
+                    Bekijk team
+                </button>
+            </article>
+        </div>
+
+        <div id="teamEmpty" class="team-empty">
+            😕 Geen teams gevonden. Probeer een andere zoekterm.
+        </div>
+
+        <div class="team-form-card" style="max-width:850px;margin:55px auto 0;">
+            <div style="text-align:center;margin-bottom:28px;">
+                <div class="team-badge" style="margin:0 auto 16px;">🚀</div>
+                <h2>Wil je bij mijn nieuwe team?</h2>
+                <p style="opacity:.75;">
+                    Vul het formulier in. Zo kan ik zien wie er graag mee wil doen.
+                </p>
+            </div>
+
+            <form class="team-form" id="teamApplicationForm" action="https://formspree.io/f/mljdnpda" method="POST">
+                <input type="hidden" name="_subject" value="Nieuwe Fortnite team-aanmelding">
+                <input type="hidden" name="_next" value="https://44238-png.github.io/fortnite-news/">
+
+                <div class="form-row">
+                    <div>
+                        <label for="playerName">Naam</label>
+                        <input id="playerName" name="Naam" type="text" placeholder="Je naam" required>
+                    </div>
+                    <div>
+                        <label for="epicName">Epic Games naam</label>
+                        <input id="epicName" name="Epic Games naam" type="text" placeholder="Je Epic Games naam" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="age">Leeftijd</label>
+                        <input id="age" name="Leeftijd" type="number" min="10" max="99" placeholder="Bijv. 12" required>
+                    </div>
+                    <div>
+                        <label for="mode">Favoriete modus</label>
+                        <select id="mode" name="Favoriete modus" required>
+                            <option value="">Kies een modus</option>
+                            <option>Battle Royale</option>
+                            <option>Zero Build</option>
+                            <option>Reload</option>
+                            <option>Creative</option>
+                            <option>Meerdere modi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="discord">Discord-naam (optioneel)</label>
+                    <input id="discord" name="Discord naam" type="text" placeholder="Bijv. jouwnaam">
+                </div>
+
+                <div>
+                    <label for="experience">Vertel iets over jezelf</label>
+                    <textarea id="experience" name="Ervaring" placeholder="Bijvoorbeeld hoe lang je Fortnite speelt en wat je leuk vindt om te spelen..." required></textarea>
+                </div>
+
+                <div>
+                    <label for="reason">Waarom wil je bij het team?</label>
+                    <textarea id="reason" name="Waarom wil je bij het team?" placeholder="Vertel waarom je graag mee wilt doen..." required></textarea>
+                </div>
+
+                <div class="team-form-actions">
+                    <button class="btn btn-primary" type="submit">🚀 Aanmelden voor het team</button>
+                    <button class="btn" type="reset">Leegmaken</button>
+                </div>
+
+                <p class="team-note">
+                    ℹ️ Je aanvraag wordt via Formspree naar de ingestelde ontvanger van het formulier verstuurd.
+                </p>
+
+                <div id="teamSuccess" class="team-success">
+                    ✅ Je aanmelding is ingevuld! Bewaar of stuur de gegevens naar de teambeheerder als je wilt dat de aanmelding echt wordt ontvangen.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 <section id="community">
 
 <div class="container">
 
-    <div class="section-title">
-
-        <div>
-
-            <h2>💬 Community Poll</h2>
-
-            <p>
-                Stem op je favoriete Fortnite-gameplay.
-            </p>
-
-        </div>
-
-    </div>
-
-
     <div class="poll">
 
-        <h2>
+        <h2>💬 Community Poll</h2>
+
+        <p>
             Welke Fortnite-gameplay speel jij het liefst?
-        </h2>
-
-        <p class="poll-description">
-            Kies één antwoord:
         </p>
-
 
         <div class="poll-buttons">
 
-            <button onclick="vote('Battle Royale',this)">
+            <button onclick="vote('Battle Royale')">
                 🏝️ Battle Royale
             </button>
 
-            <button onclick="vote('Zero Build',this)">
+            <button onclick="vote('Zero Build')">
                 🎯 Zero Build
             </button>
 
-            <button onclick="vote('Creative',this)">
+            <button onclick="vote('Creative')">
                 🧱 Creative
             </button>
 
-            <button onclick="vote('Reload',this)">
+            <button onclick="vote('Reload')">
                 ⚡ Reload
             </button>
 
         </div>
 
-
-        <p
-            id="voteResult"
-            class="vote-result">
-        </p>
-
-
-        <!-- UITSLAGEN -->
-
-        <div class="poll-results">
-
-            <h3>
-                📊 Uitslagen
-            </h3>
-
-            <div id="resultsList"></div>
-
-
-            <p class="total-votes">
-
-                Totaal aantal stemmen:
-                <strong id="totalVotes">
-                    0
-                </strong>
-
-            </p>
-
-        </div>
+        <p id="voteResult" style="margin-top:18px"></p>
 
     </div>
 
@@ -1596,21 +1703,19 @@ footer strong{
 
 <footer>
 
-<div class="container">
+    <div class="container">
 
-    <strong>
-        FORTNITE NEWS
-    </strong>
+        <strong>FORTNITE NEWS</strong>
 
-    <br><br>
+        <br><br>
 
-    Fanwebsite gemaakt voor Fortnite-fans.
+        Fanwebsite gemaakt voor Fortnite-fans.
 
-    <br>
+        <br>
 
-    Niet officieel verbonden aan Epic Games.
+        Niet officieel verbonden aan Epic Games.
 
-</div>
+    </div>
 
 </footer>
 
@@ -1621,12 +1726,9 @@ footer strong{
 
     <div class="modal-box">
 
-        <button
-            class="modal-close"
-            onclick="closeModal()">
+        <button class="modal-close" onclick="closeModal()">
             ✕
         </button>
-
 
         <img
             class="modal-image"
@@ -1634,7 +1736,6 @@ footer strong{
             src=""
             alt=""
         >
-
 
         <div class="modal-content">
 
@@ -1663,12 +1764,9 @@ footer strong{
 
     <div class="modal-box">
 
-        <button
-            class="modal-close"
-            onclick="closeNews()">
+        <button class="modal-close" onclick="closeNews()">
             ✕
         </button>
-
 
         <div class="modal-content">
 
@@ -1698,9 +1796,12 @@ footer strong{
 const SHOP_URL =
 "https://raw.githubusercontent.com/Fortnite-Datamining/Fortnite-Datamining/main/data/shop/current.json";
 
+const NEW_COSMETICS_URL =
+"https://fortnite-api.com/v2/cosmetics/new?language=en";
+
 
 /* =========================================================
-   SHOP STATE
+   STATE
 ========================================================= */
 
 let allShopItems = [];
@@ -1708,9 +1809,7 @@ let allShopItems = [];
 let currentFilter = "all";
 
 let favorites =
-JSON.parse(
-    localStorage.getItem("fortniteFavorites") || "[]"
-);
+JSON.parse(localStorage.getItem("fortniteFavorites") || "[]");
 
 
 /* =========================================================
@@ -1783,7 +1882,7 @@ const CATEGORY_INFO = {
 
 
 /* =========================================================
-   IMAGE
+   GET IMAGE
 ========================================================= */
 
 function getImage(item){
@@ -1808,7 +1907,7 @@ function getImage(item){
 
 
 /* =========================================================
-   NAME
+   GET NAME
 ========================================================= */
 
 function getName(item){
@@ -1824,7 +1923,7 @@ function getName(item){
 
 
 /* =========================================================
-   TYPE
+   GET TYPE
 ========================================================= */
 
 function getType(item){
@@ -1838,7 +1937,6 @@ function getType(item){
             item.type ||
             ""
         ).toLowerCase();
-
 
     if(
         type.includes("outfit") ||
@@ -1883,7 +1981,7 @@ function getType(item){
 
 
 /* =========================================================
-   NORMALIZE SHOP
+   NORMALIZE SHOP ENTRY
 ========================================================= */
 
 function normalizeEntry(entry){
@@ -1891,7 +1989,16 @@ function normalizeEntry(entry){
     if(!entry) return null;
 
 
+    /* BUNDLES */
+
     if(entry.bundle){
+
+        const bundleName =
+            entry.bundle.name ||
+            entry.bundle.displayName ||
+            entry.name ||
+            "Bundle";
+
 
         return {
 
@@ -1900,11 +2007,7 @@ function normalizeEntry(entry){
                 entry.bundle.offerId ||
                 Math.random().toString(),
 
-            name:
-                entry.bundle.name ||
-                entry.bundle.displayName ||
-                entry.name ||
-                "Bundle",
+            name:bundleName,
 
             type:"Bundle",
 
@@ -1932,10 +2035,11 @@ function normalizeEntry(entry){
     }
 
 
+    /* JAM TRACK */
+
     if(entry.tracks && entry.tracks.length){
 
-        const track =
-            entry.tracks[0];
+        const track = entry.tracks[0];
 
         return {
 
@@ -1972,6 +2076,8 @@ function normalizeEntry(entry){
     }
 
 
+    /* COSMETICS */
+
     const items =
         Array.isArray(entry.brItems)
             ? entry.brItems
@@ -1980,8 +2086,8 @@ function normalizeEntry(entry){
 
     let chosen = null;
 
-
     const priority = [
+
         "Outfit",
         "Pickaxe",
         "BackBling",
@@ -1989,6 +2095,7 @@ function normalizeEntry(entry){
         "Emote",
         "Wrap",
         "Kicks"
+
     ];
 
 
@@ -2031,8 +2138,7 @@ function normalizeEntry(entry){
                 entry.final_price ??
                 0,
 
-            description:
-                "Fortnite item",
+            description:"Fortnite item",
 
             raw:entry
 
@@ -2041,8 +2147,7 @@ function normalizeEntry(entry){
     }
 
 
-    const category =
-        getType(chosen);
+    const category = getType(chosen);
 
 
     return {
@@ -2055,8 +2160,7 @@ function normalizeEntry(entry){
         name:
             getName(chosen),
 
-        type:
-            category,
+        type:category,
 
         image:
             getImage(chosen) ||
@@ -2103,9 +2207,7 @@ async function loadShop(){
 
         const response =
             await fetch(
-                SHOP_URL +
-                "?t=" +
-                Date.now()
+                SHOP_URL + "?t=" + Date.now()
             );
 
 
@@ -2141,16 +2243,15 @@ async function loadShop(){
         allShopItems =
             entries
                 .map(normalizeEntry)
-                .filter(
-                    item =>
-                        item &&
-                        item.name
+                .filter(item =>
+                    item &&
+                    item.name
                 );
 
 
-        const seen =
-            new Set();
+        /* Remove duplicates */
 
+        const seen = new Set();
 
         allShopItems =
             allShopItems.filter(item => {
@@ -2160,11 +2261,9 @@ async function loadShop(){
                     item.name +
                     item.type;
 
-
                 if(seen.has(key)){
                     return false;
                 }
-
 
                 seen.add(key);
 
@@ -2189,7 +2288,6 @@ async function loadShop(){
     }catch(error){
 
         console.error(error);
-
 
         status.textContent =
             "Shop kon niet worden geladen";
@@ -2221,21 +2319,17 @@ async function loadShop(){
 function renderShop(){
 
     const container =
-        document.getElementById(
-            "shopContainer"
-        );
+        document.getElementById("shopContainer");
 
 
     const search =
-        document.getElementById(
-            "shopSearch"
-        )
-        .value
-        .toLowerCase()
-        .trim();
+        document.getElementById("shopSearch")
+            .value
+            .toLowerCase()
+            .trim();
 
 
-    const filtered =
+    let filtered =
         allShopItems.filter(item => {
 
             const matchesFilter =
@@ -2250,10 +2344,8 @@ function renderShop(){
                     .includes(search);
 
 
-            return (
-                matchesFilter &&
-                matchesSearch
-            );
+            return matchesFilter &&
+                   matchesSearch;
 
         });
 
@@ -2280,6 +2372,7 @@ function renderShop(){
 
 
     const categories = [
+
         "Outfit",
         "Pickaxe",
         "BackBling",
@@ -2290,6 +2383,7 @@ function renderShop(){
         "JamTrack",
         "Bundle",
         "Other"
+
     ];
 
 
@@ -2308,8 +2402,7 @@ function renderShop(){
 
         const items =
             filtered.filter(
-                item =>
-                    item.type === category
+                item => item.type === category
             );
 
 
@@ -2356,7 +2449,6 @@ function renderShop(){
                     </div>
 
                 </div>
-
 
                 <div class="shop-grid">
 
@@ -2416,14 +2508,13 @@ function createShopCard(item){
                     onerror="this.src='https://via.placeholder.com/500x500?text=Fortnite'"
                 >
 
-
                 <button
                     class="shop-fav"
                     onclick="toggleFavorite(event,'${escapeJs(item.id)}')"
+                    title="Favoriet"
                 >
                     ${favorite ? "❤️" : "♡"}
                 </button>
-
 
                 <span class="shop-type">
                     ${escapeHtml(
@@ -2437,15 +2528,12 @@ function createShopCard(item){
 
             <div class="shop-info">
 
-                <h4>
+                <h4 title="${escapeHtml(item.name)}">
                     ${escapeHtml(item.name)}
                 </h4>
 
                 <div class="shop-sub">
-                    ${escapeHtml(
-                        item.description ||
-                        "Fortnite cosmetic"
-                    )}
+                    ${escapeHtml(item.description || "Fortnite cosmetic")}
                 </div>
 
 
@@ -2546,9 +2634,7 @@ document
                 renderShop();
 
 
-                if(
-                    currentFilter !== "all"
-                ){
+                if(currentFilter !== "all"){
 
                     setTimeout(() => {
 
@@ -2620,32 +2706,28 @@ function openItem(id){
 
     const item =
         allShopItems.find(
-            x =>
-                String(x.id) ===
-                String(id)
+            x => String(x.id) === String(id)
         );
 
 
     if(!item) return;
 
 
-    document.getElementById(
-        "modalImage"
-    ).src =
+    document.getElementById("modalImage")
+        .src =
         item.image ||
         "https://via.placeholder.com/900x500?text=Fortnite";
 
 
-    document.getElementById(
-        "modalTitle"
-    ).textContent =
+    document.getElementById("modalTitle")
+        .textContent =
         item.name;
 
 
-    document.getElementById(
-        "modalDescription"
-    ).textContent =
+    document.getElementById("modalDescription")
+        .textContent =
         item.description ||
+        CATEGORY_INFO[item.type]?.description ||
         "Fortnite item";
 
 
@@ -2653,9 +2735,8 @@ function openItem(id){
         Number(item.price) || 0;
 
 
-    document.getElementById(
-        "modalPrice"
-    ).textContent =
+    document.getElementById("modalPrice")
+        .textContent =
         price > 0
             ? "💰 " +
               price.toLocaleString("nl-NL") +
@@ -2685,27 +2766,23 @@ function closeModal(){
 
 function openDefaultSkin(){
 
-    document.getElementById(
-        "modalImage"
-    ).src =
+    document.getElementById("modalImage")
+        .src =
         "https://fortnite-api.com/images/cosmetics/br/character_default/icon.png";
 
 
-    document.getElementById(
-        "modalTitle"
-    ).textContent =
+    document.getElementById("modalTitle")
+        .textContent =
         "Default Skin";
 
 
-    document.getElementById(
-        "modalDescription"
-    ).textContent =
+    document.getElementById("modalDescription")
+        .textContent =
         "De klassieke Fortnite Default Skin. ⭐ Deze zit er speciaal in voor mijn vriend ❤️";
 
 
-    document.getElementById(
-        "modalPrice"
-    ).textContent =
+    document.getElementById("modalPrice")
+        .textContent =
         "⭐ Speciale vermelding";
 
 
@@ -2722,15 +2799,13 @@ function openDefaultSkin(){
 
 function openNews(title,text){
 
-    document.getElementById(
-        "newsModalTitle"
-    ).textContent =
+    document.getElementById("newsModalTitle")
+        .textContent =
         title;
 
 
-    document.getElementById(
-        "newsModalText"
-    ).textContent =
+    document.getElementById("newsModalText")
+        .textContent =
         text;
 
 
@@ -2751,25 +2826,18 @@ function closeNews(){
 
 
 /* =========================================================
-   MODAL CLICK
+   CLICK OUTSIDE MODAL
 ========================================================= */
 
 window.addEventListener(
     "click",
     event => {
 
-        if(
-            event.target.id ===
-            "itemModal"
-        ){
+        if(event.target.id === "itemModal"){
             closeModal();
         }
 
-
-        if(
-            event.target.id ===
-            "newsModal"
-        ){
+        if(event.target.id === "newsModal"){
             closeNews();
         }
 
@@ -2782,23 +2850,16 @@ window.addEventListener(
 ========================================================= */
 
 const themeBtn =
-    document.getElementById(
-        "themeBtn"
-    );
+    document.getElementById("themeBtn");
 
 
 if(
-    localStorage.getItem(
-        "fortniteTheme"
-    ) === "light"
+    localStorage.getItem("fortniteTheme")
+    === "light"
 ){
 
-    document.body.classList.add(
-        "light"
-    );
-
-    themeBtn.textContent =
-        "☀️";
+    document.body.classList.add("light");
+    themeBtn.textContent = "☀️";
 
 }
 
@@ -2807,15 +2868,11 @@ themeBtn.addEventListener(
     "click",
     () => {
 
-        document.body.classList.toggle(
-            "light"
-        );
+        document.body.classList.toggle("light");
 
 
         const light =
-            document.body.classList.contains(
-                "light"
-            );
+            document.body.classList.contains("light");
 
 
         localStorage.setItem(
@@ -2872,212 +2929,60 @@ document
 
 
 /* =========================================================
-   COMMUNITY POLL
+   POLL
 ========================================================= */
 
-const POLL_KEY =
-    "fortniteCommunityPoll";
+
+function filterTeams(){
+    const input = document.getElementById("teamSearch");
+    const query = input.value.toLowerCase().trim();
+    const cards = document.querySelectorAll("#teamList .team-card");
+    let visible = 0;
+
+    cards.forEach(card => {
+        const text = card.dataset.teamSearch.toLowerCase();
+        const show = !query || text.includes(query);
+        card.style.display = show ? "" : "block";
+        if(!show) card.style.display = "none";
+        if(show) visible++;
+    });
+
+    document.getElementById("teamEmpty").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+function showTeamInfo(teamName){
+    const result = document.getElementById("teamSuccess");
+    result.style.display = "block";
+    result.textContent =
+        "🎮 " + teamName + " is geselecteerd! Scroll naar beneden om je aan te melden voor mijn nieuwe team.";
+    result.scrollIntoView({behavior:"smooth", block:"center"});
+}
 
 
-const POLL_OPTIONS = [
-    "Battle Royale",
-    "Zero Build",
-    "Creative",
-    "Reload"
-];
+function vote(choice){
 
-
-let pollVotes =
-    JSON.parse(
-        localStorage.getItem(POLL_KEY) || "{}"
-    );
-
-
-/* Ontbrekende opties toevoegen */
-
-POLL_OPTIONS.forEach(option => {
-
-    if(
-        typeof pollVotes[option] !==
-        "number"
-    ){
-
-        pollVotes[option] = 0;
-
-    }
-
-});
-
-
-/* =========================================================
-   POLL STEMMEN
-========================================================= */
-
-function vote(choice,button){
-
-    /*
-       Lokale opslag betekent dat deze
-       stemmen alleen in deze browser
-       worden opgeslagen.
-    */
-
-    pollVotes[choice]++;
-
-
-    localStorage.setItem(
-        POLL_KEY,
-        JSON.stringify(pollVotes)
-    );
-
-
-    /* Gekozen knop markeren */
-
-    document
-        .querySelectorAll(
-            ".poll-buttons button"
-        )
-        .forEach(btn =>
-            btn.classList.remove(
-                "selected"
-            )
-        );
-
-
-    if(button){
-
-        button.classList.add(
-            "selected"
-        );
-
-    }
-
-
-    document.getElementById(
-        "voteResult"
-    ).textContent =
+    document.getElementById("voteResult")
+        .textContent =
         "✅ Je stem voor " +
         choice +
         " is opgeslagen!";
 
-
-    document.getElementById(
-        "voteResult"
-    ).style.color =
-        "var(--green)";
-
-
-    updatePollResults();
-
 }
 
 
 /* =========================================================
-   POLL UITSLAGEN
+   AUTO UPDATE
 ========================================================= */
-
-function updatePollResults(){
-
-    const list =
-        document.getElementById(
-            "resultsList"
-        );
-
-
-    if(!list) return;
-
-
-    let total = 0;
-
-
-    POLL_OPTIONS.forEach(
-        option => {
-            total +=
-                pollVotes[option];
-        }
-    );
-
-
-    document.getElementById(
-        "totalVotes"
-    ).textContent =
-        total;
-
-
-    list.innerHTML = "";
-
-
-    POLL_OPTIONS.forEach(
-        option => {
-
-            const amount =
-                pollVotes[option];
-
-
-            const percentage =
-                total > 0
-                    ? (amount / total) * 100
-                    : 0;
-
-
-            const result =
-                document.createElement(
-                    "div"
-                );
-
-
-            result.className =
-                "result";
-
-
-            result.innerHTML = `
-
-                <div class="result-top">
-
-                    <span>
-                        ${option}
-                    </span>
-
-                    <span>
-                        ${amount}
-                        stemmen
-                        (${percentage.toFixed(1)}%)
-                    </span>
-
-                </div>
-
-
-                <div class="result-bar">
-
-                    <div
-                        class="result-fill"
-                        style="width:${percentage}%"
-                    ></div>
-
-                </div>
-
-            `;
-
-
-            list.appendChild(
-                result
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-updatePollResults();
 
 loadShop();
 
 
-/* Shop iedere 10 minuten verversen */
+/*
+   Iedere 10 minuten opnieuw laden.
+   Zo hoeft de website niet handmatig
+   aangepast te worden wanneer de shop verandert.
+*/
 
 setInterval(
     loadShop,
@@ -3088,4 +2993,3 @@ setInterval(
 
 </body>
 </html>
-```
