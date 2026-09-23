@@ -900,6 +900,96 @@ footer strong{
 /* ================= MOBILE ================= */
 
 
+
+/* =========================
+   TEAMLEDEN
+========================= */
+.members-section{
+    padding:80px 20px;
+}
+
+.members-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:22px;
+    margin-top:32px;
+}
+
+.member-card{
+    background:var(--card,#151515);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:22px;
+    padding:24px;
+    box-shadow:0 12px 35px rgba(0,0,0,.16);
+    transition:transform .2s ease, border-color .2s ease;
+}
+
+.member-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(124,58,237,.55);
+}
+
+.member-avatar{
+    width:70px;
+    height:70px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    background:linear-gradient(135deg,#7c3aed,#2563eb);
+    margin-bottom:16px;
+}
+
+.member-avatar-image{
+    overflow:hidden;
+}
+.member-avatar-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+.member-role{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(124,58,237,.15);
+    font-size:12px;
+    font-weight:800;
+    margin:5px 0 12px;
+}
+
+.member-info{
+    display:grid;
+    gap:8px;
+    font-size:14px;
+    opacity:.82;
+}
+
+.member-status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    margin-top:15px;
+}
+
+.member-dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#22c55e;
+}
+
+.member-note{
+    max-width:760px;
+    margin:14px auto 0;
+    text-align:center;
+    opacity:.65;
+    font-size:13px;
+}
+
 /* =========================
    TEAM SECTIE
 ========================= */
@@ -1655,6 +1745,84 @@ footer strong{
                 </div>
             </form>
         </div>
+    </div>
+</section>
+
+
+<section id="teamleden" class="members-section">
+    <div class="container">
+        <div style="text-align:center;max-width:800px;margin:0 auto;">
+            <span class="team-tag">👥 ONS TEAM</span>
+            <h2 style="font-size:clamp(32px,5vw,48px);margin:15px 0 10px;">
+                Onze <span style="color:#7c3aed;">Teamleden</span>
+            </h2>
+            <p style="opacity:.75;">
+                Dit zijn de spelers die officieel bij het team horen.
+            </p>
+        </div>
+
+        <div class="members-grid">
+
+            <article class="member-card">
+                <div class="member-avatar">👑</div>
+                <h3>Thijs</h3>
+                <span class="member-role">👑 Team Leader</span>
+
+                <div class="member-info">
+                    <div>🌍 Nederland</div>
+                    <div>🎮 Build</div>
+                    <div>🏆 Teambeheer & toernooien</div>
+                </div>
+
+                <div class="member-status">
+                    <span class="member-dot"></span>
+                    Team Leader
+                </div>
+            </article>
+
+            <article class="member-card">
+                <div class="member-avatar member-avatar-image">
+                    <img src="https://fortnite-api.com/images/cosmetics/br/character_default/icon.png"
+                         alt="Default Skin"
+                         onerror="this.style.display='none';this.parentElement.textContent='🎮';">
+                </div>
+                <h3>Mijn vriend</h3>
+                <span class="member-role">⭐ Member</span>
+
+                <div class="member-info">
+                    <div>🎮 Fortnite</div>
+                    <div>⭐ Teamlid</div>
+                    <div>🤝 Mijn vriend</div>
+                </div>
+
+                <div class="member-status">
+                    <span class="member-dot"></span>
+                    Actief teamlid
+                </div>
+            </article>
+
+            <article class="member-card">
+                <div class="member-avatar">⚡</div>
+                <h3>Teamlid 3</h3>
+                <span class="member-role">⭐ Member</span>
+
+                <div class="member-info">
+                    <div>🌍 Land toevoegen</div>
+                    <div>🎮 Speelmodus toevoegen</div>
+                    <div>🏆 Rol toevoegen</div>
+                </div>
+
+                <div class="member-status">
+                    <span class="member-dot"></span>
+                    Actief teamlid
+                </div>
+            </article>
+
+        </div>
+
+        <p class="member-note">
+            Nieuwe spelers worden pas hier toegevoegd nadat jij ze officieel aan het team hebt toegevoegd.
+        </p>
     </div>
 </section>
 
